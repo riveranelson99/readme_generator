@@ -23,7 +23,7 @@ const questions = [
     },
     {
         type: "list",
-        choices: ["Apache", "Eclipse", "GNU", "IBM", "MIT", "Mozilla", "None"],
+        choices: ["MIT", "Apache 2.0", "GPL 3.0", "BSD 3", "None"],
         message: "What kind of license should your project have?",
         name: 'license',
     },
@@ -33,8 +33,8 @@ const questions = [
         default: "npm i",
     },
     {
-        message: "What command should be run to run tests",
-        name: "test",
+        message: "What command should be run to run tests?",
+        name: "tests",
         default: "npm test",
     },
     {
@@ -43,14 +43,14 @@ const questions = [
     },
     {
         message: "What does the user need to know about contributing to the repo?",
-        name: "contribute",
+        name: "contributing",
     },
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, generateMarkdown(data), (err) => { 
-        err ? console.error(err) : console.log("\nGenerating README...")
+        err ? console.error(err) : console.log("Generating README...")
     }
 );
 }
@@ -60,7 +60,7 @@ function init() {
     inquirer
         .prompt(questions)
         .then((response) => { 
-            writeToFile("README.md", response)
+            writeToFile(`${response.title}README.md`, response)
         });
 }
 
